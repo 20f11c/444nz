@@ -7,68 +7,140 @@
   <meta name="description" content="20f11c/cgh 篡改猴脚本展示页" />
   <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    :root {
+      --page-bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --line: #e2e8f0;
+      --brand-soft: #eef2ff;
+      --brand: #3f51b5;
+    }
+
     body {
-      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      margin: 0;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 0% 0%, #eef2ff 0%, rgba(238, 242, 255, 0) 35%),
+        linear-gradient(180deg, #f8fafc 0%, #f5f7fb 100%);
     }
-    .hero {
-      border: 1px solid #e9ecef;
-      background: #fff;
-      border-radius: 1rem;
+
+    .page-wrap {
+      max-width: 1040px;
     }
+
+    .hero,
     .script-card {
-      border: 1px solid #e9ecef;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
       border-radius: 1rem;
-      transition: all .2s ease;
-      background: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .04);
     }
-    .script-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
+
+    .hero-title {
+      letter-spacing: .3px;
     }
-    .tag {
-      display: inline-block;
-      padding: .2rem .55rem;
-      border-radius: 999px;
-      font-size: .8rem;
-      background: #eef2ff;
-      color: #3949ab;
-      margin-right: .35rem;
-      margin-bottom: .35rem;
+
+    .hero .lead {
+      font-size: 1.06rem;
+      line-height: 1.75;
+      color: var(--text-muted) !important;
+      margin-bottom: .9rem;
     }
+
     .repo-link {
       word-break: break-all;
+      color: var(--text-muted) !important;
+      font-size: .95rem;
+    }
+
+    .section-title {
+      letter-spacing: .2px;
+    }
+
+    .script-card {
+      transition: all .2s ease;
+    }
+
+    .script-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: .28rem .62rem;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+      background: var(--brand-soft);
+      color: var(--brand);
+      margin-right: .42rem;
+      margin-bottom: .42rem;
+    }
+
+    .info-panel {
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      background: #fcfdff;
+      padding: 1rem;
+      height: 100%;
+    }
+
+    .info-panel h4 {
+      margin-bottom: .65rem;
+    }
+
+    .info-panel ul,
+    .info-panel ol {
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.75;
+      padding-left: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero,
+      .script-card {
+        border-radius: .85rem;
+      }
+
+      .btn-install {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="container py-5">
-    <section class="hero p-4 p-md-5 mb-4">
+  <main class="container page-wrap py-4 py-md-5">
+    <section class="hero p-4 p-md-5 mb-4 mb-md-5">
       <div class="row align-items-center g-4">
         <div class="col-lg-8">
-          <h1 class="display-6 fw-bold mb-3">篡改猴脚本库</h1>
-          <p class="lead text-secondary mb-3">
+          <h1 class="display-6 fw-bold mb-3 hero-title">篡改猴脚本库</h1>
+          <p class="lead mb-0">
             这是一个用于集中管理 Tampermonkey 用户脚本的仓库，当前收录脚本聚焦于
             <strong>八叉书库去广告、弹窗拦截、0 金币自动订阅</strong>。
           </p>
-          <p class="mb-0 text-secondary repo-link">
+          <p class="mt-3 mb-0 repo-link">
             仓库地址：
             <a href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">https://github.com/20f11c/cgh</a>
           </p>
         </div>
         <div class="col-lg-4 text-lg-end">
-          <a class="btn btn-primary btn-lg" href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">查看 GitHub 仓库</a>
+          <a class="btn btn-primary btn-lg px-4" href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">查看 GitHub 仓库</a>
         </div>
       </div>
     </section>
 
     <section class="mb-4">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h4 mb-0">脚本列表</h2>
-        <span class="badge text-bg-dark">1 个脚本</span>
+      <div class="d-flex justify-content-between align-items-center mb-3 mb-md-4">
+        <h2 class="h4 mb-0 section-title">脚本列表</h2>
+        <span class="badge rounded-pill text-bg-dark px-3 py-2">1 个脚本</span>
       </div>
 
       <article class="script-card p-4">
-        <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-3 mb-4">
           <div>
             <h3 class="h5 mb-2">八叉书库广告屏蔽</h3>
             <p class="text-secondary mb-2">
@@ -81,15 +153,15 @@
             </div>
           </div>
           <div class="text-md-end">
-            <a class="btn btn-success" href="https://raw.githubusercontent.com/20f11c/cgh/main/bcskadx.user.js" target="_blank" rel="noopener noreferrer">一键安装脚本</a>
+            <a class="btn btn-success btn-install px-4" href="https://raw.githubusercontent.com/20f11c/cgh/main/bcskadx.user.js" target="_blank" rel="noopener noreferrer">一键安装脚本</a>
           </div>
         </div>
 
         <div class="row g-3">
           <div class="col-md-6">
-            <div class="border rounded-3 p-3 h-100">
+            <div class="info-panel">
               <h4 class="h6">主要功能</h4>
-              <ul class="mb-0 text-secondary">
+              <ul>
                 <li>屏蔽页面广告 iframe / script / ins 及站内广告脚本</li>
                 <li>清理推荐广告模块、广告图片与落地链接</li>
                 <li>拦截广告域名相关弹窗（window.open）</li>
@@ -98,9 +170,9 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="border rounded-3 p-3 h-100">
+            <div class="info-panel">
               <h4 class="h6">安装与更新</h4>
-              <ol class="mb-2 text-secondary">
+              <ol class="mb-2">
                 <li>先安装浏览器扩展 <strong>Tampermonkey</strong>。</li>
                 <li>点击“<strong>一键安装脚本</strong>”完成安装。</li>
                 <li>脚本通过 <code>@updateURL</code> / <code>@downloadURL</code> 自动更新。</li>
