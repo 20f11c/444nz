@@ -15,26 +15,65 @@
       --line: #e2e8f0;
       --brand-soft: #eef2ff;
       --brand: #3f51b5;
+      --brand-dark: #23348d;
     }
 
     body {
       margin: 0;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 0% 0%, #eef2ff 0%, rgba(238, 242, 255, 0) 35%),
+        radial-gradient(circle at 0% 0%, #e9edff 0%, rgba(233, 237, 255, 0) 35%),
+        radial-gradient(circle at 100% 0%, #f0f9ff 0%, rgba(240, 249, 255, 0) 30%),
         linear-gradient(180deg, #f8fafc 0%, #f5f7fb 100%);
     }
 
+    .top-nav {
+      backdrop-filter: saturate(170%) blur(8px);
+      background: rgba(255, 255, 255, .84);
+      border-bottom: 1px solid rgba(226, 232, 240, .8);
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--brand), #6074e2);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 700;
+      margin-right: .55rem;
+    }
+
     .page-wrap {
-      max-width: 1040px;
+      max-width: 1080px;
     }
 
     .hero,
-    .script-card {
+    .script-card,
+    .feature-card {
       background: var(--card-bg);
       border: 1px solid var(--line);
       border-radius: 1rem;
       box-shadow: 0 8px 24px rgba(15, 23, 42, .04);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      top: -80px;
+      background: radial-gradient(circle, rgba(99, 102, 241, .2) 0%, rgba(99, 102, 241, 0) 70%);
+      pointer-events: none;
     }
 
     .hero-title {
@@ -58,11 +97,13 @@
       letter-spacing: .2px;
     }
 
-    .script-card {
+    .script-card,
+    .feature-card {
       transition: all .2s ease;
     }
 
-    .script-card:hover {
+    .script-card:hover,
+    .feature-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
     }
@@ -100,23 +141,73 @@
       padding-left: 1.1rem;
     }
 
+    .feature-card {
+      padding: 1rem;
+      height: 100%;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: .6rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      background: #e9edff;
+    }
+
+    .site-footer {
+      color: var(--text-muted);
+      font-size: .92rem;
+      border-top: 1px solid var(--line);
+    }
+
     @media (max-width: 768px) {
       .hero,
-      .script-card {
+      .script-card,
+      .feature-card {
         border-radius: .85rem;
       }
 
-      .btn-install {
+      .btn-install,
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
         width: 100%;
       }
     }
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg sticky-top top-nav">
+    <div class="container page-wrap py-2">
+      <a class="navbar-brand d-flex align-items-center fw-semibold" href="#">
+        <span class="brand-mark">CGH</span>
+        篡改猴脚本库
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topMenu" aria-controls="topMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="topMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#scripts">脚本列表</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">核心能力</a></li>
+        </ul>
+        <a class="btn btn-primary ms-lg-3" href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
+      </div>
+    </div>
+  </nav>
+
   <main class="container page-wrap py-4 py-md-5">
     <section class="hero p-4 p-md-5 mb-4 mb-md-5">
       <div class="row align-items-center g-4">
         <div class="col-lg-8">
+          <span class="badge rounded-pill text-bg-primary-subtle text-primary-emphasis mb-3">Tampermonkey Script Collection</span>
           <h1 class="display-6 fw-bold mb-3 hero-title">篡改猴脚本库</h1>
           <p class="lead mb-0">
             这是一个用于集中管理 Tampermonkey 用户脚本的仓库，当前收录脚本聚焦于
@@ -127,13 +218,42 @@
             <a href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">https://github.com/20f11c/cgh</a>
           </p>
         </div>
-        <div class="col-lg-4 text-lg-end">
-          <a class="btn btn-primary btn-lg px-4" href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">查看 GitHub 仓库</a>
+        <div class="col-lg-4">
+          <div class="hero-actions d-grid gap-2 justify-content-lg-end">
+            <a class="btn btn-primary btn-lg px-4" href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer">查看 GitHub 仓库</a>
+            <a class="btn btn-outline-primary" href="https://raw.githubusercontent.com/20f11c/cgh/main/bcskadx.user.js" target="_blank" rel="noopener noreferrer">直接安装当前脚本</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="mb-4">
+    <section id="features" class="mb-4 mb-md-5">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">AD</div>
+            <h3 class="h6 mb-2">广告清理</h3>
+            <p class="mb-0 text-secondary small">移除 iframe / script / ins 及常见广告容器，减少阅读干扰。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">POP</div>
+            <h3 class="h6 mb-2">弹窗拦截</h3>
+            <p class="mb-0 text-secondary small">拦截广告域名相关弹窗调用，避免被强制跳转。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">0¥</div>
+            <h3 class="h6 mb-2">自动订阅</h3>
+            <p class="mb-0 text-secondary small">识别 0 金币章节自动订阅，内置防抖保护避免重复请求。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scripts" class="mb-4">
       <div class="d-flex justify-content-between align-items-center mb-3 mb-md-4">
         <h2 class="h4 mb-0 section-title">脚本列表</h2>
         <span class="badge rounded-pill text-bg-dark px-3 py-2">1 个脚本</span>
@@ -186,6 +306,13 @@
       </article>
     </section>
   </main>
+
+  <footer class="site-footer py-4">
+    <div class="container page-wrap d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>© 2026 CGH Tampermonkey Scripts</span>
+      <a href="https://github.com/20f11c/cgh" target="_blank" rel="noopener noreferrer" class="text-decoration-none">GitHub: 20f11c/cgh</a>
+    </div>
+  </footer>
 
   <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
