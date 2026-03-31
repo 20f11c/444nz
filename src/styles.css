@@ -97,13 +97,20 @@ a {
   line-height: 1.75;
 }
 
-.hero-indicators [data-bs-target] {
+.hero-indicator-btn {
+  width: 30px;
+  height: 3px;
+  border: 0;
+  border-radius: 999px;
   background-color: #94a3b8;
+  opacity: 0.6;
 }
 
-.hero-indicators .active {
+.hero-indicator-btn.active {
   background-color: var(--brand);
+  opacity: 1;
 }
+
 
 .hero-control {
   width: 6%;
